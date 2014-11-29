@@ -331,6 +331,24 @@ image 'repo:new_tag' => 'repo:tag' do
 end
 ```
 
+## Running Spec Tests
+
+Docker-api comes with a comprehensive test suite, which you may execute using `rake spec`:
+
+```
+docker-api$ rake spec
+Docker::Connection
+  #initialize
+    when the first argument is not a String
+... (lots of happy green lines) ...
+Finished in 11.34 seconds (files took 0.43871 seconds to load)
+136 examples, 0 failures, 8 pending
+Coverage report generated for RSpec to /Users/flip/ics/book/big_data_for_chimps/examples/vendor/docker-api/coverage. 1260 / 1350 LOC (93.33%) covered.
+```
+
+Note that you must not have a value set for `$DOCKER_HOST` and friends, or you will see a host of "`An HTTP request has been made that VCR does not know how to handle`" errors. Instead, run `(unset DOCKER_HOST DOCKER_TLS_VERIFY DOCKER_CERT_PATH ; rake spec)`.
+
+
 ## Not supported (yet)
 
 *   Generating a tarball of images and metadata for a repository specified by a name: https://docs.docker.com/reference/api/docker_remote_api_v1.12/#get-a-tarball-containing-all-images-and-tags-in-a-repository
