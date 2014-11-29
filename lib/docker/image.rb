@@ -22,7 +22,9 @@ class Docker::Image
   end
 
   # allows subclasses to delegate to their own friends
-  def _create_container(opts, connection) Docker::Container.create(opts, connection); end
+  def _create_container(opts, connection)
+    Docker::Container.create(opts, connection)
+  end
   private :_create_container
 
   # Push the Image to the Docker registry.

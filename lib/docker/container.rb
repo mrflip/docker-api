@@ -83,12 +83,14 @@ class Docker::Container
   end
 
   # allows subclasses to delegate to their own friends
-  def _create_image(cnxn, hash); Docker::Image.send(:new, cnxn, hash) ; end
+  def _create_image(cnxn, hash)
+    Docker::Image.send(:new, cnxn, hash)
+  end
   private :_create_image
 
   # Return a String representation of the Container.
   def to_s
-    "#{self.class.name} { :id => #{self.id}, :connection => #{self.connection} }"
+    self.class.name+" { :id => #{self.id}, :connection => #{self.connection} }"
   end
 
   # #json returns information about the Container, #changes returns a list of
