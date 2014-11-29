@@ -127,6 +127,17 @@ describe Docker::Image do
       new_image.push(credentials)
     end
 
+    it 'raises an error if unauthorized', :vcr do
+      expect { new_image.push(credentials.merge('username' => 'haxx0r'))
+        }.to raise_error(Docker::Error::UnauthorizedError)
+    end
+
+    it 'calls back to a supplied block', :vcr do
+      calls = 0
+      new_image.push(credentials){|step| calls += 1 if step['id'] =~ /^70/ }
+      expect(calls).to eq(17)
+    end
+
     context 'when there are no credentials' do
       let(:credentials) { nil }
       let(:image) {
@@ -255,6 +266,14 @@ describe Docker::Image do
         expect(image.id).to_not be_nil
         expect(image.id).to_not be_empty
         expect(image.info[:headers].keys).to include 'X-Registry-Auth'
+      end
+
+      it 'calls back to a supplied block', :vcr do
+        calls = 0
+        subject.create('fromImage' => 'ubuntu') do |step|
+          calls += 1 if step['id'] =~ /^5/
+        end
+        expect(calls).to eq(22)
       end
     end
   end

@@ -28,7 +28,7 @@ class Docker::Image
   private :_create_container
 
   # Push the Image to the Docker registry.
-  def push(creds = nil, options = {})
+  def push(creds = nil, options = {}, &callback)
     repo_tag = info['RepoTags'].first
     raise ArgumentError "Image is untagged" if repo_tag.nil?
     repo, tag = Docker::Util.parse_repo_tag(repo_tag)
@@ -37,8 +37,28 @@ class Docker::Image
     credentials = creds || Docker.creds || {}
     headers = Docker::Util.build_auth_header(credentials)
     opts = {:tag => tag}.merge(options)
-    connection.post("/images/#{repo}/push", opts, :headers => headers)
+    #
+    connection.post("/images/#{repo}/push", opts, :headers => headers,
+      :response_block => response_block_for_push(callback))
     self
+  rescue StandardError => err
+    if err.message =~ %r{Status 401 trying to push}
+      raise Docker::Error::UnauthorizedError, err.message
+    else
+      raise
+    end
+  end
+
+  def response_block_for_push(callback)
+    return ->(chunk, *_) do
+      steps = Docker::Util.fix_json(chunk)
+      steps.each do |step|
+        # errors thrown here are re-thrown by Excon,
+        # so re-re-rescue any expected errors later
+        raise step['error'] if step['error']
+        callback.call(step) if callback
+      end
+    end
   end
 
   # Tag the Image.
@@ -100,13 +120,33 @@ class Docker::Image
   class << self
 
     # Create a new Image.
-    def create(opts = {}, creds = nil, conn = Docker.connection)
+    def create(opts = {}, creds = nil, conn = Docker.connection, &callback)
       credentials = creds.nil? ? Docker.creds : creds.to_json
       headers = !credentials.nil? && Docker::Util.build_auth_header(credentials)
       headers ||= {}
-      body = conn.post('/images/create', opts, :headers => headers)
-      id = Docker::Util.fix_json(body).select { |m| m['id'] }.last['id']
-      new(conn, 'id' => id, :headers => headers)
+      #
+      layer_ids = []
+      conn.post('/images/create', opts, :headers => headers,
+        :response_block => response_block_for_create(layer_ids, callback))
+      new(conn, 'id' => layer_ids.last, :headers => headers)
+    rescue StandardError => err
+      if err.message =~ %r{not found in repository}
+        raise Docker::Error::UnauthorizedError, err.message
+      else
+        raise
+      end
+    end
+
+    def response_block_for_create(layer_ids, callback)
+      return ->(chunk, *_) do
+        steps = Docker::Util.fix_json(chunk)
+        steps.each do |step|
+          # errors here are re-thrown by Excon, so re-re-rescue in the caller
+          raise step['error'] if step['error']
+          layer_ids << step['id'] if step['id']
+          callback.call(step) if callback
+        end
+      end
     end
 
     # Return a specific image.

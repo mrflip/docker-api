@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: unix:///var/run/docker.sock/v1.12/images/create?fromImage=ubuntu
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Swipely/Docker-API 1.15.0
+      Content-Type:
+      - text/plain
+      X-Registry-Auth:
+      - eyJ1c2VybmFtZSI6InRsdW50ZXIiLCJwYXNzd29yZCI6IioqKioqKioqKioqKiIsImVtYWlsIjoidGx1bnRlckBnbWFpbC5jb20ifQ==
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 Nov 2014 11:16:06 GMT
+    body:
+      encoding: UTF-8
+      string: "{\"status\":\"The image you are pulling has been verified\",\"id\":\"ubuntu:12.04\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"8439f4034ca8\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"320de3ddbeb5\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"67fcff2588cb\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"45753d623bcc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5daddf45eeaf\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"120acb8ad8a3\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:12.04.5\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"8439f4034ca8\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"320de3ddbeb5\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"67fcff2588cb\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"45753d623bcc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5daddf45eeaf\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"120acb8ad8a3\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:14.04\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5bc37dc2dfba\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"61cb619d86bc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"3f45ca85fedc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"78e82ee876a2\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"dc07507cef42\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"86ce37374f40\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:14.04.1\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5bc37dc2dfba\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"61cb619d86bc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"3f45ca85fedc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"78e82ee876a2\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"dc07507cef42\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"86ce37374f40\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:14.10\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"e12c576ad8a1\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"102eb2a101b8\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"530dbbae98a0\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"37dde56c3a42\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"8f118367086c\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"277eb4304907\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:15.04\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"409fac6a29b9\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"42210244ddd6\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"58b93b950e10\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"f9c1ed5b91b6\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"e66edef79a6a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"76f2fd412141\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:latest\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5bc37dc2dfba\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"61cb619d86bc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"3f45ca85fedc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"78e82ee876a2\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"dc07507cef42\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"86ce37374f40\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:precise\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"8439f4034ca8\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"320de3ddbeb5\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"67fcff2588cb\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"45753d623bcc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5daddf45eeaf\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"120acb8ad8a3\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:trusty\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"5bc37dc2dfba\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"61cb619d86bc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"3f45ca85fedc\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"78e82ee876a2\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"dc07507cef42\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"86ce37374f40\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:utopic\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"e12c576ad8a1\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"102eb2a101b8\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"530dbbae98a0\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"37dde56c3a42\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"8f118367086c\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"277eb4304907\"}{\"status\":\"The image
+        you are pulling has been verified\",\"id\":\"ubuntu:vivid\"}\r\n{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"511136ea3c5a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"409fac6a29b9\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"42210244ddd6\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"58b93b950e10\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"f9c1ed5b91b6\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"e66edef79a6a\"}{\"status\":\"Already
+        exists\",\"progressDetail\":{},\"id\":\"76f2fd412141\"}{\"status\":\"Status:
+        Image is up to date for ubuntu\"}\r\n"
+    http_version: 
+  recorded_at: Sat, 29 Nov 2014 11:16:11 GMT
+recorded_with: VCR 2.9.3
