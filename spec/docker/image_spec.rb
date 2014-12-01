@@ -134,7 +134,9 @@ describe Docker::Image do
 
     it 'calls back to a supplied block', :vcr do
       calls = 0
-      new_image.push(credentials){|step| calls += 1 if step['id'] =~ /^70/ }
+      new_image.push(credentials) do |step, obj|
+        calls += 1 if (obj.id =~ /^fae7e195e7a/) && (step['id'] =~ /^70/)
+      end
       expect(calls).to eq(17)
     end
 
@@ -160,6 +162,7 @@ describe Docker::Image do
       it 'still pushes', :vcr do
         expect { image.push }.to_not raise_error
       end
+
     end
   end
 
@@ -270,8 +273,8 @@ describe Docker::Image do
 
       it 'calls back to a supplied block', :vcr do
         calls = 0
-        subject.create('fromImage' => 'ubuntu') do |step|
-          calls += 1 if step['id'] =~ /^5/
+        subject.create('fromImage' => 'ubuntu') do |step, obj|
+          calls += 1 if (obj['fromImage'] == 'ubuntu') && (step['id'] =~ /^5/)
         end
         expect(calls).to eq(22)
       end

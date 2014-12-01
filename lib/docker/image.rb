@@ -42,10 +42,12 @@ class Docker::Image
       :response_block => response_block_for_push(callback))
     self
   rescue StandardError => err
-    if err.message =~ %r{Status 401 trying to push}
-      raise Docker::Error::UnauthorizedError, err.message
-    else
-      raise
+    case err.message
+    when %r{is already in progress}     # don't error
+      return self
+    when %r{Status 401 trying to push}
+      raise Docker::Error::UnauthorizedError, err.message, err.backtrace
+    else raise
     end
   end
 
@@ -53,10 +55,8 @@ class Docker::Image
     return ->(chunk, *_) do
       steps = Docker::Util.fix_json(chunk)
       steps.each do |step|
-        # errors thrown here are re-thrown by Excon,
-        # so re-re-rescue any expected errors later
         raise step['error'] if step['error']
-        callback.call(step) if callback
+        callback.call(step, self) if callback
       end
     end
   end
@@ -127,24 +127,25 @@ class Docker::Image
       #
       layer_ids = []
       conn.post('/images/create', opts, :headers => headers,
-        :response_block => response_block_for_create(layer_ids, callback))
+        :response_block => response_block_for_create(layer_ids, opts, callback))
       new(conn, 'id' => layer_ids.last, :headers => headers)
     rescue StandardError => err
-      if err.message =~ %r{not found in repository}
-        raise Docker::Error::UnauthorizedError, err.message
+      case err.message
+      when %r{not found in repository}
+        raise Docker::Error::NotFoundError, err.message, err.backtrace
       else
         raise
       end
     end
 
-    def response_block_for_create(layer_ids, callback)
+    def response_block_for_create(layer_ids, opts, callback)
       return ->(chunk, *_) do
         steps = Docker::Util.fix_json(chunk)
         steps.each do |step|
           # errors here are re-thrown by Excon, so re-re-rescue in the caller
           raise step['error'] if step['error']
           layer_ids << step['id'] if step['id']
-          callback.call(step) if callback
+          callback.call(step, opts) if callback
         end
       end
     end
